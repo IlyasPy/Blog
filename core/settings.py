@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'PIL',
     # 2nd party apps
     'users',
+    'blogs',
 ]
 
 MIDDLEWARE = [
