@@ -44,4 +44,5 @@ urlpatterns = [
     path('api/login/verify/', TokenVerifyView.as_view(), name='login-verify'),
     # included apps
     path('', include('users.urls')),
+    path('blogs/', include('blogs.urls')),
 ]

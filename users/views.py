@@ -3,9 +3,10 @@ from rest_framework import permissions, mixins, generics
 from rest_framework.response import Response
 from .serializers import RegisterSerializer, UserSerializer
 from .models import CustomUser
-
+from .permissions import IsOwner
 
 class RegisterAPIView(generics.GenericAPIView):
+    queryset = CustomUser.objects.all()
     serializer_class = RegisterSerializer
 
     def post(self, request, *args, **kwargs):
@@ -16,3 +17,16 @@ class RegisterAPIView(generics.GenericAPIView):
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "message": "User Created Successfully."
         })
+
+
+class UserListAPIView(generics.ListAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (permissions.IsAdminUser, permissions.IsAuthenticated)
+
+
+class UserDetailAPIView(generics.RetrieveAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsOwner,)
+
