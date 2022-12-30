@@ -21,12 +21,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return f'{self.username} - {self.email}'
 
-    def has_perm(self, perm, obj=None):
-        return self.is_admin
-
-    def has_module_perm(self, app_label):
-        return True
-
     class Meta:
         verbose_name = 'User'
         verbose_name_plural = 'Users'

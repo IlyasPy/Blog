@@ -6,6 +6,7 @@ class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
         fields = ['id', 'name', 'description', 'owner', 'date_added']
+        read_only_fields = ['owner']
 
 
 class ArticleSerializer(serializers.ModelSerializer):
