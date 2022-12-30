@@ -6,9 +6,12 @@ from .models import CustomUser
 from .permissions import IsOwnerOrReadOnly
 
 
-class RegisterAPIView(generics.GenericAPIView):
+class RegisterAPIView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = RegisterSerializer
+    permission_classes = [permissions.AllowAny,]
+
+
 
 
 class UserListAPIView(generics.ListAPIView):

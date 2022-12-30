@@ -8,7 +8,7 @@ from users.permissions import IsOwnerOrReadOnly
 class BlogListView(generics.ListCreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
-    permission_classes = IsOwnerOrReadOnly
+    permission_classes = (IsOwnerOrReadOnly,)
 
     def perform_create(self, serializer):
         serializer.save(
@@ -19,6 +19,7 @@ class BlogListView(generics.ListCreateAPIView):
 class BlogDetailView(generics.RetrieveUpdateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
 
 
 class ArticleListView(generics.ListCreateAPIView):
