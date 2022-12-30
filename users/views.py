@@ -3,7 +3,8 @@ from rest_framework import permissions, mixins, generics
 from rest_framework.response import Response
 from .serializers import RegisterSerializer, UserSerializer
 from .models import CustomUser
-from .permissions import IsOwner
+from .permissions import IsOwnerOrReadOnly
+
 
 class RegisterAPIView(generics.GenericAPIView):
     queryset = CustomUser.objects.all()
@@ -22,11 +23,11 @@ class RegisterAPIView(generics.GenericAPIView):
 class UserListAPIView(generics.ListAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (permissions.IsAdminUser, permissions.IsAuthenticated)
+    permission_classes = (permissions.IsAdminUser, permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
 
 class UserDetailAPIView(generics.RetrieveAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (IsOwner,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 

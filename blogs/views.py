@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .serializers import BlogSerializer, ArticleSerializer
 from .models import Blog, Article
 from rest_framework import generics, permissions
-from users.permissions import IsOwner
+from users.permissions import IsOwnerOrReadOnly
 
 
 class BlogListView(generics.ListCreateAPIView):
